@@ -38,15 +38,15 @@
         <div class="vs-letras">VS</div>
         @if (partido.confirmado) {
           <div class="vs-fecha">{{ partido.fecha }} · {{ partido.hora }}</div>
-          <div class="vs-campo">{{ partido.campo }}</div>
+          @if (partido.campo) {
+            <div class="vs-campo">{{ partido.campo }}</div>
+          }
         } @else {
           <div class="vs-fecha">Pendiente de confirmar</div>
         }
       </div>
       <div class="equipo rival">
-        <span>{{ partido.confirmado ? partido.rival.toUpperCase() : 'POR CONFIRMAR' }}</span>
-        <div class="escudo-vacio" aria-hidden="true"></div>
-      </div>
+        <span>{{ partido.confirmado ? partido.rival.toUpperCase() : 'POR CONFIRMAR' }}</span>      </div>
     </div>
 
     <div class="stats">
