@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, ElementRef, computed, signal, viewChild } from '@angular/core';
 import { CLUB, FORMACIONES, JUGADORES, Jugador, TITULARES } from '../../data/club.data';
 
 interface JugadorEnCampo extends Jugador {
@@ -40,7 +40,20 @@ export class PlantillaComponent {
     this.formacion.set(f);
   }
 
+  private readonly fichaEl = viewChild.required<ElementRef<HTMLElement>>('fichaEl');
+
   seleccionar(dorsal: number): void {
     this.seleccionado.set(dorsal);
+    this.mostrarFicha();
+  }
+
+  /** Si la ficha no se ve entera (móvil o PC), se desplaza hasta ella. */
+  private mostrarFicha(): void {
+    const ficha = this.fichaEl().nativeElement;
+    const r = ficha.getBoundingClientRect();
+    const cabecera = 80;
+    if (r.top < cabecera || r.bottom > window.innerHeight) {
+      ficha.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }

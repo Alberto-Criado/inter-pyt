@@ -91,3 +91,6 @@
 .staff .h3 { margin-bottom: 6px; }
 .fila { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
 .fila span { color: var(--texto-3); }
+
+/* Deja sitio a la cabecera fija al desplazarse hasta la ficha. */
+.ficha { scroll-margin-top: 88px; }
