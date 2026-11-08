@@ -1,0 +1,106 @@
+<!-- PORTADA -->
+<section class="hero">
+  <div class="container hero-in">
+    <div class="hero-texto">
+      <div class="eyebrow-linea">
+        <span class="linea"></span>
+        <span class="eyebrow">Fútbol 7 · Temporada {{ club.temporada }}</span>
+      </div>
+      <h1 class="hero-titulo">INTER<br /><span>PYT</span></h1>
+      <p class="lema">{{ club.lema }}</p>
+      <div class="acciones">
+        <a routerLink="/plantilla" class="btn btn-oro">
+          Ver la plantilla
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </a>
+        <a routerLink="/" fragment="partidos" class="btn btn-borde">Próximo partido</a>
+      </div>
+    </div>
+    <div class="hero-escudo">
+      <div class="aro">
+        <img src="escudo.webp" [alt]="'Escudo del ' + club.nombre" width="958" height="1080" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTIDOS -->
+<section id="partidos" class="banda">
+  <div class="container seccion">
+    <h2 class="titulo h2">PRÓXIMO PARTIDO</h2>
+    <div class="card partido">
+      <div class="equipo">
+        <img src="escudo.webp" alt="" width="64" height="64" class="redondo" />
+        <span>{{ club.nombre.toUpperCase() }}</span>
+      </div>
+      <div class="vs">
+        <div class="vs-letras">VS</div>
+        @if (partido.confirmado) {
+          <div class="vs-fecha">{{ partido.fecha }} · {{ partido.hora }}</div>
+          <div class="vs-campo">{{ partido.campo }}</div>
+        } @else {
+          <div class="vs-fecha">Pendiente de confirmar</div>
+        }
+      </div>
+      <div class="equipo rival">
+        <span>{{ partido.confirmado ? partido.rival.toUpperCase() : 'POR CONFIRMAR' }}</span>
+        <div class="escudo-vacio" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="card stat">
+        <div class="stat-label">Último resultado</div>
+        <div class="stat-valor">{{ stats.ultimoResultado }}</div>
+        <div class="stat-detalle">{{ stats.ultimoPartidoFecha }}</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-label">Posición en liga</div>
+        <div class="stat-valor">{{ stats.posicionLiga }}</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-label">Máximo goleador</div>
+        <div class="stat-valor">{{ stats.maximoGoleador }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPACIÓN -->
+<section id="equipacion">
+  <div class="container seccion equipacion">
+    <div class="equipacion-texto">
+      <span class="eyebrow">Nueva equipación</span>
+      <h2 class="titulo h2-grande">AZUL Y NEGRO</h2>
+      <p>No somos el Inter, pero lo intentamos cada finde.</p>
+      <a routerLink="/plantilla" class="enlace">Conoce a los jugadores →</a>
+    </div>
+    <div class="equipacion-img">
+      <img src="equipacion.png" [alt]="'Camiseta del ' + club.nombre + ', delantera y trasera, con rayas azules y negras'" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- PATROCINADORES -->
+<section id="patrocinadores" class="banda borde-arriba">
+  <div class="container seccion">
+    <h2 class="titulo h2">PATROCINADORES</h2>
+    <div class="sponsors">
+      @for (p of patrocinadores; track p.nombre) {
+        <a class="card sponsor sponsor-enlace" [attr.href]="p.web" target="_blank" rel="noopener">
+          @if (p.logo) {
+            <img class="sponsor-logo" [src]="p.logo" alt="" loading="lazy" />
+            <span class="sponsor-tipo">{{ p.nombre }}</span>
+          } @else {
+            <span class="sponsor-nombre">{{ p.nombre.toUpperCase() }}</span>
+          }
+        </a>
+      }
+      <a class="sponsor sponsor-libre" [href]="club.instagram" target="_blank" rel="noopener">
+        <span class="sponsor-nombre">TU MARCA AQUÍ</span>
+        <span class="sponsor-tipo">Contacta con el club</span>
+      </a>
+    </div>
+  </div>
+</section>
