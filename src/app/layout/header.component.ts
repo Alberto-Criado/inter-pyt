@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CLUB } from '../data/club.data';
 
 @Component({
   selector: 'app-header',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, RouterLinkActive],
   template: `
     <header class="header">
@@ -18,7 +19,7 @@ import { CLUB } from '../data/club.data';
           class="toggle"
           [attr.aria-expanded]="menuAbierto()"
           aria-controls="menu-principal"
-          aria-label="Abrir menú"
+          [attr.aria-label]="menuAbierto() ? 'Cerrar menú' : 'Abrir menú'"
           (click)="alternarMenu()"
         >
           <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none"

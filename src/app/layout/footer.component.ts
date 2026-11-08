@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CLUB } from '../data/club.data';
 
 @Component({
   selector: 'app-footer',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <footer>
       <div class="container pie">

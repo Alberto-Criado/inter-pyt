@@ -1,4 +1,4 @@
-import { Component, ElementRef, computed, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, computed, signal, viewChild } from '@angular/core';
 import { CLUB, FORMACIONES, JUGADORES, Jugador, TITULARES } from '../../data/club.data';
 
 interface JugadorEnCampo extends Jugador {
@@ -8,6 +8,7 @@ interface JugadorEnCampo extends Jugador {
 
 @Component({
   selector: 'app-plantilla',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './plantilla.component.html',
   styleUrl: './plantilla.component.css',
 })
@@ -47,11 +48,14 @@ export class PlantillaComponent {
     this.mostrarFicha();
   }
 
-  /** Si la ficha no se ve entera (móvil o PC), se desplaza hasta ella. */
+  /**
+   * Si la ficha no se ve entera (móvil o PC), se desplaza hasta ella.
+   * El hueco de la cabecera fija sale del `scroll-margin-top` del CSS, así la medida está en un solo sitio.
+   */
   private mostrarFicha(): void {
     const ficha = this.fichaEl().nativeElement;
     const posicion = ficha.getBoundingClientRect();
-    const cabecera = 80;
+    const cabecera = parseFloat(getComputedStyle(ficha).scrollMarginTop) || 0;
     if (posicion.top < cabecera || posicion.bottom > window.innerHeight) {
       ficha.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
