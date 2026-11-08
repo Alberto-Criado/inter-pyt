@@ -24,7 +24,7 @@ Todo el contenido está en **`src/app/data/club.data.ts`**:
 - `FORMACIONES`: las posiciones en el campo (en %). Puedes añadir más sistemas.
 - `PROXIMO_PARTIDO`, `ESTADISTICAS`, `PATROCINADORES` y `CLUB` (Instagram, entrenador…).
 
-Las imágenes están en `public/` (`escudo.webp` y `equipacion.png`).
+Las imágenes están en `public/` (`escudo.webp` y `equipacion.webp`).
 
 ## Estructura
 

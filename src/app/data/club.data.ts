@@ -38,7 +38,7 @@ export const CLUB = {
 /** Con `confirmado: false` la web muestra "Pendiente de confirmar" en vez de los datos. */
 export const PROXIMO_PARTIDO = {
   confirmado: true,
-  rival: 'Los Chiwis',
+  rival: 'Los Chiwes',
   fecha: 'Dom 15 nov',
   hora: '16:00',
   campo: '',
