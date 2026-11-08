@@ -42,20 +42,19 @@ export const PROXIMO_PARTIDO = {
   fecha: 'Dom 15 nov',
   hora: '16:00',
   campo: '',
-  local: true,
 };
 
+/** El máximo goleador no se escribe aquí: se calcula solo a partir de los goles de JUGADORES. */
 export const ESTADISTICAS = {
   ultimoResultado: 'Inter PYT 4 – 0 La Laguna',
   ultimoPartidoFecha: 'Dom 8 nov · 9:00',
   posicionLiga: '1º · 12 puntos',
-  maximoGoleador: 'Moreno · 4 goles',
 };
 
 /** `logo` es opcional: ruta a una imagen dentro de `public/`. Sin logo se muestra el nombre. */
 export const PATROCINADORES: { nombre: string; logo?: string; web?: string }[] = [
-  { nombre: 'Villalba PyT', logo: 'pyt-villalba.png', web: 'https://pytvillalba.es/' },
-  { nombre: 'Autoescuela Grande', logo: 'autoescuela-grande.png', web: 'https://autoescuelagrande.com/' },
+  { nombre: 'Villalba PyT', logo: 'pyt-villalba.webp', web: 'https://pytvillalba.es/' },
+  { nombre: 'Autoescuela Grande', logo: 'autoescuela-grande.webp', web: 'https://autoescuelagrande.com/' },
 ];
 
 /**
@@ -81,6 +80,15 @@ export const JUGADORES: Jugador[] = [
   { dorsal: 70, nombre: 'Sergio', posicion: 'Mediocentro', partidos: 1, goles: 1 },
   { dorsal: 21, nombre: 'Rios', posicion: 'Lateral', partidos: 3, goles: 0 },
 ];
+
+/** "Moreno · 4 goles". Si hay empate salen todos: "Moreno y Mugi · 4 goles". */
+export function maximoGoleador(jugadores: Jugador[]): string {
+  const maximo = Math.max(0, ...jugadores.map((jugador) => jugador.goles));
+  if (maximo === 0) return 'Sin goles todavía';
+  const nombres = jugadores.filter((jugador) => jugador.goles === maximo).map((jugador) => jugador.nombre);
+  const lista = nombres.length > 1 ? `${nombres.slice(0, -1).join(', ')} y ${nombres.at(-1)}` : nombres[0];
+  return `${lista} · ${maximo} ${maximo === 1 ? 'gol' : 'goles'}`;
+}
 
 /**
  * Dorsales de los 7 titulares, en orden: POR, DEF…, MED…, DEL…
