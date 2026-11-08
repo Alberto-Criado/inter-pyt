@@ -23,8 +23,10 @@ Todo el contenido está en **`src/app/data/club.data.ts`**:
 - `TITULARES`: los 7 dorsales que salen en el campo, en orden portero → defensas → medios → delanteros.
 - `FORMACIONES`: las posiciones en el campo (en %). Puedes añadir más sistemas.
 - `PROXIMO_PARTIDO`, `ESTADISTICAS`, `PATROCINADORES` y `CLUB` (Instagram, entrenador…).
+- El máximo goleador se calcula solo con los goles de `JUGADORES`.
 
-Las imágenes están en `public/` (`escudo.webp` y `equipacion.webp`).
+Las imágenes están en `public/` en formato WebP (escudo, equipación y logos de patrocinadores).
+Las fuentes (Oswald e Inter) se sirven desde la propia web con `@fontsource`, sin llamar a Google.
 
 ## Estructura
 
@@ -43,4 +45,7 @@ Hecho con componentes standalone, signals y el nuevo control flow (`@for`, `@let
 ## Publicar
 
 Al ser una SPA, en el hosting configura que todas las rutas sirvan `index.html`
-(Netlify: archivo `_redirects` con `/* /index.html 200`; Vercel/Firebase: rewrite a `/index.html`).
+(`public/_redirects` ya lo hace en Netlify y Cloudflare Pages; en Vercel/Firebase, rewrite a `/index.html`).
+
+`public/_headers` añade las cabeceras de seguridad (CSP, nosniff, Referrer-Policy…) en Netlify y Cloudflare Pages.
+Cuando tengas dominio, pon la URL completa en `og:image` de `src/index.html` para la vista previa al compartir.
