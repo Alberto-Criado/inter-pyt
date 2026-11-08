@@ -87,13 +87,13 @@
   <div class="container seccion">
     <h2 class="titulo h2">PATROCINADORES</h2>
     <div class="sponsors">
-      @for (p of patrocinadores; track p.nombre) {
-        <a class="card sponsor sponsor-enlace" [attr.href]="p.web" target="_blank" rel="noopener">
-          @if (p.logo) {
-            <img class="sponsor-logo" [src]="p.logo" alt="" loading="lazy" />
-            <span class="sponsor-tipo">{{ p.nombre }}</span>
+      @for (patrocinador of patrocinadores; track patrocinador.nombre) {
+        <a class="card sponsor sponsor-enlace" [attr.href]="patrocinador.web" target="_blank" rel="noopener">
+          @if (patrocinador.logo) {
+            <img class="sponsor-logo" [src]="patrocinador.logo" alt="" loading="lazy" />
+            <span class="sponsor-tipo">{{ patrocinador.nombre }}</span>
           } @else {
-            <span class="sponsor-nombre">{{ p.nombre.toUpperCase() }}</span>
+            <span class="sponsor-nombre">{{ patrocinador.nombre.toUpperCase() }}</span>
           }
         </a>
       }

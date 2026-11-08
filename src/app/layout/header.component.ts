@@ -62,6 +62,6 @@ export class HeaderComponent {
   readonly menuAbierto = signal(false);
 
   alternarMenu(): void {
-    this.menuAbierto.update((v) => !v);
+    this.menuAbierto.update((abierto) => !abierto);
   }
 }

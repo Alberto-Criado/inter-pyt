@@ -20,10 +20,10 @@ export interface Jugador {
   goles: number;
 }
 
-/** Un hueco del campo: posición en % (x = izquierda→derecha, y = arriba→abajo). */
+/** Un hueco del campo, en % del campo: horizontal = izquierda→derecha, vertical = arriba→abajo. */
 export interface Hueco {
-  x: number;
-  y: number;
+  horizontal: number;
+  vertical: number;
   posicion: Linea;
 }
 
@@ -89,30 +89,30 @@ export const TITULARES: number[] = [16, 7, 25, 8, 20, 70, 9];
 
 export const FORMACIONES: Record<string, Hueco[]> = {
   '3-2-1': [
-    { x: 50, y: 89, posicion: 'Portero' },
-    { x: 20, y: 69, posicion: 'Defensa' },
-    { x: 50, y: 71, posicion: 'Defensa' },
-    { x: 80, y: 69, posicion: 'Defensa' },
-    { x: 32, y: 45, posicion: 'Medio' },
-    { x: 68, y: 45, posicion: 'Medio' },
-    { x: 50, y: 19, posicion: 'Delantero' },
+    { horizontal: 50, vertical: 89, posicion: 'Portero' },
+    { horizontal: 20, vertical: 69, posicion: 'Defensa' },
+    { horizontal: 50, vertical: 71, posicion: 'Defensa' },
+    { horizontal: 80, vertical: 69, posicion: 'Defensa' },
+    { horizontal: 32, vertical: 45, posicion: 'Medio' },
+    { horizontal: 68, vertical: 45, posicion: 'Medio' },
+    { horizontal: 50, vertical: 19, posicion: 'Delantero' },
   ],
   '2-3-1': [
-    { x: 50, y: 89, posicion: 'Portero' },
-    { x: 32, y: 70, posicion: 'Defensa' },
-    { x: 68, y: 70, posicion: 'Defensa' },
-    { x: 16, y: 46, posicion: 'Medio' },
-    { x: 50, y: 48, posicion: 'Medio' },
-    { x: 84, y: 46, posicion: 'Medio' },
-    { x: 50, y: 19, posicion: 'Delantero' },
+    { horizontal: 50, vertical: 89, posicion: 'Portero' },
+    { horizontal: 32, vertical: 70, posicion: 'Defensa' },
+    { horizontal: 68, vertical: 70, posicion: 'Defensa' },
+    { horizontal: 16, vertical: 46, posicion: 'Medio' },
+    { horizontal: 50, vertical: 48, posicion: 'Medio' },
+    { horizontal: 84, vertical: 46, posicion: 'Medio' },
+    { horizontal: 50, vertical: 19, posicion: 'Delantero' },
   ],
   '3-1-2': [
-    { x: 50, y: 89, posicion: 'Portero' },
-    { x: 20, y: 69, posicion: 'Defensa' },
-    { x: 50, y: 71, posicion: 'Defensa' },
-    { x: 80, y: 69, posicion: 'Defensa' },
-    { x: 50, y: 47, posicion: 'Medio' },
-    { x: 30, y: 21, posicion: 'Delantero' },
-    { x: 70, y: 21, posicion: 'Delantero' },
+    { horizontal: 50, vertical: 89, posicion: 'Portero' },
+    { horizontal: 20, vertical: 69, posicion: 'Defensa' },
+    { horizontal: 50, vertical: 71, posicion: 'Defensa' },
+    { horizontal: 80, vertical: 69, posicion: 'Defensa' },
+    { horizontal: 50, vertical: 47, posicion: 'Medio' },
+    { horizontal: 30, vertical: 21, posicion: 'Delantero' },
+    { horizontal: 70, vertical: 21, posicion: 'Delantero' },
   ],
 };

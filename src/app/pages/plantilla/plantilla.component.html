@@ -5,10 +5,10 @@
       <h1 class="titulo h1">LA PLANTILLA</h1>
     </div>
     <div class="formaciones" role="group" aria-label="Sistema de juego">
-      @for (f of formaciones; track f) {
-        <button type="button" class="pill" [class.activa]="f === formacion()"
-                [attr.aria-pressed]="f === formacion()" (click)="elegirFormacion(f)">
-          {{ f }}
+      @for (sistema of formaciones; track sistema) {
+        <button type="button" class="pill" [class.activa]="sistema === formacion()"
+                [attr.aria-pressed]="sistema === formacion()" (click)="elegirFormacion(sistema)">
+          {{ sistema }}
         </button>
       }
     </div>
@@ -27,15 +27,15 @@
         <div class="linea area abajo" aria-hidden="true"></div>
         <div class="linea area-peq abajo" aria-hidden="true"></div>
 
-        @for (j of enCampo(); track j.dorsal) {
-          <div class="jugador" [style.left.%]="j.x" [style.top.%]="j.y">
-            <button type="button" class="ficha-btn" [class.sel]="j.dorsal === seleccionado()"
-                    [attr.aria-label]="j.nombre + ', dorsal ' + j.dorsal + ', ' + j.posicion"
-                    [attr.aria-pressed]="j.dorsal === seleccionado()"
-                    (click)="seleccionar(j.dorsal)">
-              {{ j.dorsal }}
+        @for (titular of enCampo(); track titular.dorsal) {
+          <div class="jugador" [style.left.%]="titular.horizontal" [style.top.%]="titular.vertical">
+            <button type="button" class="ficha-btn" [class.sel]="titular.dorsal === seleccionado()"
+                    [attr.aria-label]="titular.nombre + ', dorsal ' + titular.dorsal + ', ' + titular.posicion"
+                    [attr.aria-pressed]="titular.dorsal === seleccionado()"
+                    (click)="seleccionar(titular.dorsal)">
+              {{ titular.dorsal }}
             </button>
-            <span class="nombre">{{ j.nombre }}</span>
+            <span class="nombre">{{ titular.nombre }}</span>
           </div>
         }
       </div>
@@ -43,31 +43,31 @@
 
     <!-- LATERAL -->
     <aside class="lateral">
-      @let f = ficha();
+      @let jugador = ficha();
       <div #fichaEl class="card-oscura ficha" aria-live="polite">
         <div class="franja" aria-hidden="true"></div>
         <div class="ficha-cab">
-          <div class="ficha-dorsal">{{ f.dorsal }}</div>
+          <div class="ficha-dorsal">{{ jugador.dorsal }}</div>
           <div>
-            <div class="ficha-pos">{{ f.posicion }}</div>
-            <div class="ficha-nombre">{{ f.nombre }}</div>
+            <div class="ficha-pos">{{ jugador.posicion }}</div>
+            <div class="ficha-nombre">{{ jugador.nombre }}</div>
           </div>
         </div>
         <div class="ficha-stats">
-          <div><span class="lbl">Partidos</span><span class="val">{{ f.partidos }}</span></div>
-          <div><span class="lbl">Goles</span><span class="val">{{ f.goles }}</span></div>        </div>
+          <div><span class="lbl">Partidos</span><span class="val">{{ jugador.partidos }}</span></div>
+          <div><span class="lbl">Goles</span><span class="val">{{ jugador.goles }}</span></div>        </div>
       </div>
       <p class="ayuda">Pulsa un jugador en el campo o en el banquillo para ver su ficha.</p>
 
       <div class="card-oscura bloque">
         <h2 class="titulo h3">BANQUILLO</h2>
         <div class="banquillo">
-          @for (b of banquillo(); track b.dorsal) {
-            <button type="button" class="suplente" [class.sel]="b.dorsal === seleccionado()"
-                    [attr.aria-pressed]="b.dorsal === seleccionado()" (click)="seleccionar(b.dorsal)">
-              <span class="mini">{{ b.dorsal }}</span>
-              <span class="sup-nombre">{{ b.nombre }}</span>
-              <span class="sup-pos">{{ b.posicion }}</span>
+          @for (suplente of banquillo(); track suplente.dorsal) {
+            <button type="button" class="suplente" [class.sel]="suplente.dorsal === seleccionado()"
+                    [attr.aria-pressed]="suplente.dorsal === seleccionado()" (click)="seleccionar(suplente.dorsal)">
+              <span class="mini">{{ suplente.dorsal }}</span>
+              <span class="sup-nombre">{{ suplente.nombre }}</span>
+              <span class="sup-pos">{{ suplente.posicion }}</span>
             </button>
           } @empty {
             <p class="ayuda">Sin suplentes.</p>
