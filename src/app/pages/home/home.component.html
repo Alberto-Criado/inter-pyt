@@ -1,106 +1,104 @@
-<!-- PORTADA -->
-<section class="hero">
+<!-- PORTADA: la camiseta como lienzo, el escudo encima y el nombre en una hoja de programa -->
+<section class="hero rayas">
   <div class="container hero-in">
-    <div class="hero-texto">
-      <div class="eyebrow-linea">
-        <span class="linea"></span>
-        <span class="eyebrow">Fútbol 7 · Temporada {{ club.temporada }}</span>
-      </div>
-      <h1 class="hero-titulo">INTER<br /><span>PYT</span></h1>
-      <p class="lema">{{ club.lema }}</p>
+    <div class="hero-hoja">
+      <h1 class="hero-titulo">Inter PYT</h1>
+      <p class="lead lema">{{ club.lema }}</p>
       <div class="acciones">
-        <a routerLink="/plantilla" class="btn btn-oro">
-          Ver la plantilla
-          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-        </a>
-        <a routerLink="/" fragment="partidos" class="btn btn-borde">Próximo partido</a>
+        <a routerLink="/plantilla" class="btn btn-lleno">Ver la plantilla</a>
+        <a routerLink="/" fragment="partidos" class="btn btn-linea">Próximo partido</a>
       </div>
     </div>
     <div class="hero-escudo">
-      <div class="aro">
-        <img src="escudo.webp" [alt]="'Escudo del ' + club.nombre" width="958" height="1080" />
-      </div>
+      <img src="escudo.webp" [alt]="'Escudo del ' + club.nombre" width="958" height="1080" fetchpriority="high" />
     </div>
   </div>
 </section>
 
-<!-- PARTIDOS -->
-<section id="partidos" class="banda">
-  <div class="container seccion">
-    <h2 class="titulo h2">PRÓXIMO PARTIDO</h2>
-    <div class="card partido">
+<!-- PARTIDOS: como la portada de un programa de partido -->
+<section id="partidos" class="partidos">
+  <div class="container">
+    <h2 class="seccion-titulo">Próximo partido</h2>
+
+    <div class="cartel">
       <div class="equipo">
-        <img src="escudo.webp" alt="" width="64" height="64" class="redondo" />
-        <span>{{ club.nombre.toUpperCase() }}</span>
+        <img src="escudo.webp" alt="" width="88" height="88" class="equipo-escudo" />
+        <span class="equipo-nombre">{{ club.nombre }}</span>
       </div>
       <div class="vs">
-        <div class="vs-letras">VS</div>
-        @if (partido.confirmado) {
-          <div class="vs-fecha">{{ partido.fecha }} · {{ partido.hora }}</div>
-          @if (partido.campo) {
-            <div class="vs-campo">{{ partido.campo }}</div>
-          }
-        } @else {
-          <div class="vs-fecha">Pendiente de confirmar</div>
-        }
+        <span class="vs-letras">vs</span>
       </div>
       <div class="equipo rival">
-        <span>{{ partido.confirmado ? partido.rival.toUpperCase() : 'POR CONFIRMAR' }}</span>      </div>
+        <span class="equipo-nombre">{{ partido.confirmado ? partido.rival : 'Por confirmar' }}</span>
+      </div>
     </div>
 
-    <div class="stats">
-      <div class="card stat">
-        <div class="stat-label">Último resultado</div>
-        <div class="stat-valor">{{ stats.ultimoResultado }}</div>
-        <div class="stat-detalle">{{ stats.ultimoPartidoFecha }}</div>
-      </div>
-      <div class="card stat">
-        <div class="stat-label">Posición en liga</div>
-        <div class="stat-valor">{{ stats.posicionLiga }}</div>
-      </div>
-      <div class="card stat">
-        <div class="stat-label">Máximo goleador</div>
-        <div class="stat-valor">{{ goleador }}</div>
-      </div>
+    <div class="cuando">
+      @if (partido.confirmado) {
+        <p class="cuando-fecha">{{ partido.fecha }}, {{ partido.hora }}</p>
+        @if (partido.campo) {
+          <p class="cuando-campo">{{ partido.campo }}</p>
+        }
+      } @else {
+        <p class="cuando-fecha">Pendiente de confirmar</p>
+      }
     </div>
+
+    <dl class="registro">
+      <div class="dato">
+        <dt class="etiqueta">Último resultado</dt>
+        <dd class="dato-valor">{{ stats.ultimoResultado }}</dd>
+        <dd class="dato-detalle">{{ stats.ultimoPartidoFecha }}</dd>
+      </div>
+      <div class="dato">
+        <dt class="etiqueta">Posición en liga</dt>
+        <dd class="dato-valor">{{ stats.posicionLiga }}</dd>
+      </div>
+      <div class="dato">
+        <dt class="etiqueta">Máximo goleador</dt>
+        <dd class="dato-valor">{{ goleador }}</dd>
+      </div>
+    </dl>
   </div>
 </section>
 
 <!-- EQUIPACIÓN -->
-<section id="equipacion">
-  <div class="container seccion equipacion">
-    <div class="equipacion-texto">
-      <span class="eyebrow">Nueva equipación</span>
-      <h2 class="titulo h2-grande">AZUL Y NEGRO</h2>
-      <p>No somos el Inter, pero lo intentamos cada finde.</p>
-      <a routerLink="/plantilla" class="enlace">Conoce a los jugadores →</a>
-    </div>
-    <div class="equipacion-img">
+<section id="equipacion" class="equipacion">
+  <div class="container equipacion-in">
+    <figure class="equipacion-img">
       <img src="equipacion.webp" width="1524" height="1032" [alt]="'Camiseta del ' + club.nombre + ', delantera y trasera, con rayas azules y negras'" loading="lazy" />
+    </figure>
+    <div class="equipacion-texto">
+      <h2 class="seccion-titulo">Nueva equipación, azul y negro</h2>
+      <p class="lead">No somos el Inter, pero lo intentamos cada finde.</p>
+      <a routerLink="/plantilla" class="enlace">Conoce a los jugadores</a>
     </div>
   </div>
 </section>
 
 <!-- PATROCINADORES -->
-<section id="patrocinadores" class="banda borde-arriba">
-  <div class="container seccion">
-    <h2 class="titulo h2">PATROCINADORES</h2>
-    <div class="sponsors">
+<section id="patrocinadores" class="patrocinadores">
+  <div class="container">
+    <h2 class="seccion-titulo">Patrocinadores</h2>
+    <ul class="sponsors">
       @for (patrocinador of patrocinadores; track patrocinador.nombre) {
-        <a class="card sponsor sponsor-enlace" [attr.href]="patrocinador.web" target="_blank" rel="noopener">
-          @if (patrocinador.logo) {
-            <img class="sponsor-logo" [src]="patrocinador.logo" alt="" loading="lazy" />
-            <span class="sponsor-tipo">{{ patrocinador.nombre }}</span>
-          } @else {
-            <span class="sponsor-nombre">{{ patrocinador.nombre.toUpperCase() }}</span>
-          }
-        </a>
+        <li>
+          <a class="sponsor" [attr.href]="patrocinador.web" target="_blank" rel="noopener">
+            @if (patrocinador.logo) {
+              <img class="sponsor-logo" [src]="patrocinador.logo" [alt]="'Logo de ' + patrocinador.nombre" loading="lazy" />
+              <span class="sponsor-nombre">{{ patrocinador.nombre }}</span>
+            } @else {
+              <span class="sponsor-nombre grande">{{ patrocinador.nombre }}</span>
+            }
+          </a>
+        </li>
       }
-      <a class="sponsor sponsor-libre" [href]="club.instagram" target="_blank" rel="noopener">
-        <span class="sponsor-nombre">TU MARCA AQUÍ</span>
-        <span class="sponsor-tipo">Contacta con el club</span>
-      </a>
-    </div>
+      <li>
+        <a class="sponsor sponsor-libre" [href]="club.instagram" target="_blank" rel="noopener">
+          <span class="sponsor-libre-titulo">Tu marca aquí</span>
+          <span class="sponsor-nombre">Contacta con el club</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </section>

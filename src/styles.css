@@ -1,79 +1,46 @@
-:root {
-  --azul: #1f4fe0;
-  --azul-claro: #4c7bff;
-  --negro: #0a0b0f;
-  --negro-2: #11131a;
-  --borde: #262b3a;
-  --borde-2: #3a4054;
-  --texto: #f4f5f8;
-  --texto-2: #c9ccd6;
-  --texto-3: #9aa0b2;
-  --oro: #f2b84b;
-  --oro-hover: #ffd27a;
-  --rayas: repeating-linear-gradient(90deg, var(--azul) 0 11px, var(--negro) 11px 22px);
-  --display: 'Oswald', sans-serif;
-}
+/* Hallmark · shape: Matchday programme (swapped from Conversational FAQ, the site has no questions to answer) · genre: editorial · theme: brand · redesign: full · draw: 3215ec
+ * paper: #0a0b0f (the club's original dark) · accent: #f2b84b gold, stripes #1f4fe0 · display: Oswald · body: Inter · hero: Poster · nav: masthead · footer: statement · signature: the club shirt as the hero canvas, crest on the stripes
+ * axes: dark/display-condensed/warm · posture: the blue and navy stripes are the shirt, full bleed in the hero only · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · weakest: P, the content is fixed, so the argument lives in the voice: a printed matchday programme for friends, not a club landing page */
+/* Hallmark · reworded "FÚTBOL 7 · TEMPORADA 2026/27" into the masthead as "Fútbol 7, temporada 2026/27" · 54 and 63 name the eyebrow */
+/* Hallmark · reworded "Nueva equipación" over "AZUL Y NEGRO" to the heading "Nueva equipación, azul y negro" · 54 names the eyebrow */
+/* Hallmark · reworded "Conoce a los jugadores →" to "Conoce a los jugadores" · 63 names the glued arrow */
+@import url("./tokens.css");
+@import url("./base.css");
 
-*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
 
-html { scroll-behavior: smooth; }
+a { color: var(--color-accent); }
+a:hover { color: var(--color-accent-hover); }
 
-body {
-  margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
-  background: var(--negro);
-  color: var(--texto);
-  -webkit-font-smoothing: antialiased;
-}
-
-a { color: var(--oro); }
-a:hover { color: var(--oro-hover); }
-
-img { max-width: 100%; display: block; }
-
-.container {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding-inline: 24px;
-}
-
-.eyebrow {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--oro);
-}
-
-.titulo {
-  margin: 0;
-  font-family: var(--display);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1;
-}
-
-.card {
-  background: var(--negro);
-  border: 1px solid var(--borde);
-  border-radius: 6px;
-}
-
+/* Botones: uno lleno (azul del club) y uno de línea. */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  min-height: 52px;
-  padding: 0 28px;
+  justify-content: center;
+  gap: var(--space-xs);
+  min-height: 48px;
+  padding: 0 var(--space-lg);
+  font-family: var(--font-body);
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--text-md);
+  white-space: nowrap;
   text-decoration: none;
-  border-radius: 4px;
-  transition: background 0.2s, border-color 0.2s;
+  border: 2px solid transparent;
+  border-radius: var(--radius-card);
+  cursor: pointer;
+  transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
 }
-.btn-oro { background: var(--oro); color: var(--negro); }
-.btn-oro:hover { background: var(--oro-hover); color: var(--negro); }
-.btn-borde { border: 1.5px solid var(--borde-2); color: var(--texto); }
-.btn-borde:hover { border-color: var(--texto-2); color: var(--texto); }
+.btn:active { transform: translateY(1px); }
+.btn-lleno { background: var(--color-accent); color: var(--color-accent-ink); }
+.btn-lleno:hover { background: var(--color-accent-hover); color: var(--color-accent-ink); }
+.btn-linea { border-color: var(--color-rule-2); color: var(--color-ink); }
+.btn-linea:hover { border-color: var(--color-ink-2); color: var(--color-ink); }
 
-:focus-visible { outline: 3px solid var(--oro); outline-offset: 2px; }
+/* Fila de etiqueta pequeña: cuerpo de texto, minúsculas, sin espaciado. */
+.etiqueta { font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); }
+
+/* Las rayas del club, como material. */
+.rayas {
+  background: repeating-linear-gradient(90deg, var(--color-club) 0 var(--ancho-raya, 90px), var(--color-stripe-dark) var(--ancho-raya, 90px) calc(var(--ancho-raya, 90px) * 2));
+}

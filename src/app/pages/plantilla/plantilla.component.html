@@ -1,9 +1,6 @@
 <div class="container pagina">
   <div class="cabecera">
-    <div>
-      <span class="eyebrow">Fútbol 7</span>
-      <h1 class="titulo h1">LA PLANTILLA</h1>
-    </div>
+    <h1 class="h1">La plantilla</h1>
     <div class="formaciones" role="group" aria-label="Sistema de juego">
       @for (sistema of formaciones; track sistema) {
         <button type="button" class="pill" [class.activa]="sistema === formacion()"
@@ -28,7 +25,7 @@
         <div class="linea area-peq abajo" aria-hidden="true"></div>
 
         @for (titular of enCampo(); track titular.dorsal) {
-          <div class="jugador" [style.left.%]="titular.horizontal" [style.top.%]="titular.vertical">
+          <div class="jugador" [style.--horizontal]="titular.horizontal" [style.--vertical]="titular.vertical">
             <button type="button" class="ficha-btn" [class.sel]="titular.dorsal === seleccionado()"
                     [attr.aria-label]="titular.nombre + ', dorsal ' + titular.dorsal + ', ' + titular.posicion"
                     [attr.aria-pressed]="titular.dorsal === seleccionado()"
@@ -44,23 +41,24 @@
     <!-- LATERAL -->
     <aside class="lateral">
       @let jugador = ficha();
-      <div #fichaEl class="card-oscura ficha" aria-live="polite">
+      <div #fichaEl class="panel ficha" aria-live="polite">
         <div class="franja" aria-hidden="true"></div>
         <div class="ficha-cab">
           <div class="ficha-dorsal">{{ jugador.dorsal }}</div>
           <div>
-            <div class="ficha-pos">{{ jugador.posicion }}</div>
-            <div class="ficha-nombre">{{ jugador.nombre }}</div>
+            <p class="ficha-pos">{{ jugador.posicion }}</p>
+            <p class="ficha-nombre">{{ jugador.nombre }}</p>
           </div>
         </div>
-        <div class="ficha-stats">
-          <div><span class="lbl">Partidos</span><span class="val">{{ jugador.partidos }}</span></div>
-          <div><span class="lbl">Goles</span><span class="val">{{ jugador.goles }}</span></div>        </div>
+        <dl class="ficha-stats">
+          <div><dt class="etiqueta">Partidos</dt><dd class="val">{{ jugador.partidos }}</dd></div>
+          <div><dt class="etiqueta">Goles</dt><dd class="val">{{ jugador.goles }}</dd></div>
+        </dl>
       </div>
       <p class="ayuda">Pulsa un jugador en el campo o en el banquillo para ver su ficha.</p>
 
-      <div class="card-oscura bloque">
-        <h2 class="titulo h3">BANQUILLO</h2>
+      <div class="bloque">
+        <h2 class="h3">Banquillo</h2>
         <div class="banquillo">
           @for (suplente of banquillo(); track suplente.dorsal) {
             <button type="button" class="suplente" [class.sel]="suplente.dorsal === seleccionado()"
@@ -75,9 +73,10 @@
         </div>
       </div>
 
-      <div class="card-oscura bloque staff">
-        <h2 class="titulo h3">CUERPO TÉCNICO</h2>
-        <div class="fila"><span>Entrenador</span><strong>{{ club.entrenador }}</strong></div>      </div>
+      <div class="bloque staff">
+        <h2 class="h3">Cuerpo técnico</h2>
+        <div class="fila"><span class="etiqueta">Entrenador</span><strong>{{ club.entrenador }}</strong></div>
+      </div>
     </aside>
   </div>
 </div>

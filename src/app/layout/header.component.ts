@@ -10,8 +10,11 @@ import { CLUB } from '../data/club.data';
     <header class="header">
       <div class="container bar">
         <a routerLink="/" class="marca" (click)="menuAbierto.set(false)">
-          <img src="escudo.webp" [alt]="'Escudo ' + club.nombre" width="48" height="48" />
-          <span>{{ club.nombre.toUpperCase() }}</span>
+          <img src="escudo.webp" [alt]="'Escudo ' + club.nombre" width="44" height="44" />
+          <span class="marca-texto">
+            <span class="marca-nombre">{{ club.nombre }}</span>
+            <span class="marca-temporada">Fútbol 7, temporada {{ club.temporada }}</span>
+          </span>
         </a>
 
         <button
@@ -22,7 +25,7 @@ import { CLUB } from '../data/club.data';
           [attr.aria-label]="menuAbierto() ? 'Cerrar menú' : 'Abrir menú'"
           (click)="alternarMenu()"
         >
-          <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none"
+          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <path d="M4 7h16M4 12h16M4 17h16" />
           </svg>
@@ -40,21 +43,46 @@ import { CLUB } from '../data/club.data';
     </header>
   `,
   styles: `
-    .header { position: sticky; top: 0; z-index: 50; background: var(--negro); border-bottom: 1px solid #1e2230; }
-    .bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding-block: 14px; }
-    .marca { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--texto); }
+    .header {
+      position: sticky; top: 0; z-index: var(--z-sticky-nav);
+      background: var(--color-paper);
+      border-bottom: var(--rule-hair) solid var(--color-rule);
+    }
+    .bar {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: var(--space-xs) var(--space-md); min-height: var(--header-height); padding-block: var(--space-sm);
+    }
+    .marca { display: flex; align-items: center; gap: var(--space-sm); text-decoration: none; color: var(--color-ink); }
+    .marca:hover { color: var(--color-ink); }
     .marca img { object-fit: contain; }
-    .marca span { font-family: var(--display); font-weight: 700; font-size: 24px; letter-spacing: 0.04em; }
-    nav { display: flex; flex-wrap: wrap; gap: 4px; }
-    nav a { padding: 12px 16px; color: var(--texto-2); text-decoration: none; font-weight: 500; font-size: 15px; border-bottom: 2px solid transparent; }
-    nav a:hover { color: var(--texto); }
-    nav a.activo { color: var(--texto); font-weight: 600; border-bottom-color: var(--oro); }
-    .toggle { display: none; width: 48px; height: 48px; align-items: center; justify-content: center; background: none; border: 1px solid var(--borde-2); border-radius: 4px; color: var(--texto); cursor: pointer; }
-    @media (max-width: 760px) {
+    .marca-texto { display: flex; flex-direction: column; }
+    .marca-nombre { font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl); line-height: 1.05; }
+    .marca-temporada { font-size: var(--text-sm); color: var(--color-muted); }
+
+    nav { display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+    nav a {
+      padding: var(--space-sm) var(--space-sm); color: var(--color-ink-2); text-decoration: none;
+      font-weight: 500; font-size: var(--text-md); white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    nav a:hover { color: var(--color-ink); border-bottom-color: var(--color-rule); }
+    nav a:active { color: var(--color-accent); }
+    nav a.activo { color: var(--color-ink); font-weight: 600; border-bottom-color: var(--color-accent); }
+
+    .toggle {
+      display: none; width: 48px; height: 48px; align-items: center; justify-content: center;
+      background: none; border: var(--rule-hair) solid var(--color-rule-2); border-radius: var(--radius-card);
+      color: var(--color-ink); cursor: pointer;
+    }
+    .toggle:hover { background: var(--color-paper-2); }
+    .toggle:active { background: var(--color-paper-3); }
+
+    @media (max-width: 60rem) {
       .toggle { display: inline-flex; }
-      nav { display: none; width: 100%; flex-direction: column; padding-bottom: 8px; }
+      nav { display: none; width: 100%; flex-direction: column; padding-bottom: var(--space-xs); }
       nav.abierto { display: flex; }
-      nav a { border-bottom: 1px solid #1e2230; }
+      nav a { border-bottom: var(--rule-hair) solid var(--color-rule); }
     }
   `,
 })
